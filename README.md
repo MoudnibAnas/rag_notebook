@@ -1,3 +1,6 @@
+
+![Uploading Rag_Archi.png…]()
+
 # Local RAG Debate Generator
 
 A powerful application that generates structured academic debates from your PDF documents using Retrieval-Augmented Generation (RAG) and local LLMs.
