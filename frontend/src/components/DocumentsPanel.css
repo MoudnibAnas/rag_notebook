@@ -1,0 +1,78 @@
+/* Documents Panel Styles */
+.documents-panel {
+  width: 300px;
+  background: var(--surface-color);
+  border-radius: var(--border-radius-large);
+  padding: 24px;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.document-item {
+  padding: 12px;
+  background: var(--surface-secondary);
+  border-radius: var(--border-radius);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.document-item:hover {
+  background: var(--hover-bg);
+  border-color: var(--border-color);
+}
+
+.document-item.selected {
+  border-color: var(--primary-color);
+  background: rgba(26, 115, 232, 0.05);
+}
+
+.document-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.document-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.no-documents {
+  color: var(--text-tertiary);
+  padding: 16px;
+  text-align: center;
+}
+
+.upload-section {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-btn, .refresh-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .documents-panel {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}

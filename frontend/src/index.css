@@ -1,0 +1,11 @@
+/* Import the Sidebar styles in the main App */
+@import './components/Sidebar.css';
+@import './components/DebateInterface.css';
+@import './components/DocumentsPanel.css';
+@import './components/ChatInterface.css';
+
+/* Material Icons */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+
+/* Inter Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
