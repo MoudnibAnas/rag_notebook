@@ -4,6 +4,9 @@
 
 A minimal, high-performance RAG application similar to NotebookLM, built with Python, Ollama - For local LLM integration, and ChromaDB.
 
+## 🎥 Local RAG Debate Generator – System Architecture
+[**View the image here**](https://ibb.co/zWmqC9Q5)
+
 ## 🎥 Video Demo
 [**Watch My Loom video demo here**](#) 
 
