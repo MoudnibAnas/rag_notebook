@@ -1,7 +1,7 @@
-
-![Uploading Rag_Archi.png…]()
-
 # Local RAG Debate Generator
+
+## 🎥 Video Demo
+[**Watch My Loom video demo here**](#)
 
 A powerful application that generates structured academic debates from your PDF documents using Retrieval-Augmented Generation (RAG) and local LLMs.
 
