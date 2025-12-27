@@ -1,330 +1,201 @@
-# Local RAG Debate Generator
+# 📚 NotebookLM-style RAG Application
 
-A powerful application that generates structured academic debates from your PDF documents using Retrieval-Augmented Generation (RAG) and local LLMs.
+A minimal, high-performance RAG application similar to NotebookLM, built with Python, Google Gemini Flash, and ChromaDB.
 
-## 🎯 Features
+## ⚡ Features
 
-- **Upload PDF documents** and create a knowledge base
-- **Generate structured debates** with multiple perspectives
-- **Local LLM integration** with Ollama (no API keys required)
-- **Web interface** for easy interaction
-- **Command-line interface** for automation
-- **Clean separation** between backend and frontend
+- **🚀 Ultra-fast**: Optimized for < 2 second response times
+- **🧠 Accurate**: Google Gemini Flash for concise, structured answers
+- **🧼 Clean**: Minimal dependencies, no bloat
+- **📊 FastAPI**: REST API for backend integration
+- **🎨 Streamlit**: Simple, intuitive UI
+- **📁 PDF Support**: Upload and index multiple PDFs
+- **🔍 Smart Retrieval**: Top-K=4 similarity search with ChromaDB
+
+## 🛠️ Tech Stack
+
+- **Python 3.11+**
+- **FastAPI** - Backend API
+- **Streamlit** - Frontend UI
+- **LangChain** - RAG orchestration
+- **Google Gemini Flash** - LLM (model: gemini-2.0-flash)
+- **ChromaDB** - Vector database
+- **PyPDF** - PDF processing
+
+## 📋 Requirements
+
+- Google API Key for Gemini Flash
+- Python 3.11+
+- No Docker required
 
 ## 🚀 Quick Start
-
-### Prerequisites
-
-- **Python 3.8+**
-- **Ollama** (for local LLMs)
-- **Node.js** (for frontend development)
 
 ### 1. Install Dependencies
 
 ```bash
-# Backend dependencies
 pip install -r requirements.txt
-
-# Frontend dependencies (optional)
-cd frontend
-npm install
 ```
 
-### 2. Install Ollama Model
+### 2. Set Environment Variable
 
 ```bash
-# Download a model (recommended: mistral)
-ollama pull mistral
+export GOOGLE_API_KEY=your_api_key_here
 ```
 
-### 3. Create Database
+### 3. Run the Application
 
+**Option A: Streamlit UI (Recommended)**
 ```bash
-# Process PDFs and create vector database
-python create_database.py
+streamlit run app.py
 ```
 
-### 4. Start Application
-
-#### Option A: Manual (Recommended for development)
+**Option B: FastAPI Backend**
 ```bash
-# Terminal 1: Start backend
-cd local_rag_debate
-python app.py
-
-# Terminal 2: Start frontend
-cd frontend
-npm run dev
+python api.py
 ```
 
-#### Option B: Automated
+**Option C: Both (Development)**
 ```bash
-# Windows
-start_application.bat
+# Terminal 1: Run API
+uvicorn api:app --reload
 
-# Linux/macOS
-./start_application.sh
+# Terminal 2: Run Streamlit
+streamlit run app.py
 ```
 
-### 5. Access Application
+### 4. Use the Application
 
-- **Frontend:** http://localhost:3000
-- **Backend:** http://localhost:5000 (API server)
+1. **Upload PDFs**: Use the sidebar to upload one or more PDF files
+2. **Ask Questions**: Type your question in the chat interface
+3. **Get Answers**: Receive concise, structured responses with source citations
 
-## 📁 Project Structure
+## 🏗️ Architecture
 
+### File Structure
 ```
-local_rag_debate/
-├── local_rag_debate/          # Backend (Flask API)
-│   ├── app.py                 # Main Flask application
-│   ├── create_database.py     # PDF processing
-│   ├── query_debate.py        # Debate generation
-│   ├── requirements.txt       # Python dependencies
-│   ├── data/                  # PDF documents
-│   ├── chroma_db/             # Vector database
-│   ├── start_application.bat  # Startup script
-│   └── SETUP_GUIDE.md         # Complete setup guide
-└── frontend/                  # Frontend (React)
-    ├── src/
-    │   ├── components/
-    │   │   ├── OriginalInterface.tsx    # Main debate interface (exact replica of Python HTML)
-    │   │   └── DebateInterface.tsx     # Alternative Material-UI interface
-    │   ├── App.tsx           # Main app component
-    │   └── index.css         # Global styles
-    ├── package.json          # Frontend dependencies
-    ├── vite.config.ts        # Build configuration
-    ├── SETUP.md              # Frontend setup guide
-    └── README.md             # Frontend documentation
+rag-app/
+├── app.py                # Streamlit UI
+├── rag.py                # RAG logic (load, chunk, embed, retrieve)
+├── api.py                # FastAPI endpoint for chat
+├── requirements.txt      # Dependencies
+└── README.md            # This file
 ```
 
-## 🎨 Interface Options
+### RAG Pipeline Flow
 
-### OriginalInterface (Default)
-
-The `OriginalInterface` component is an exact replica of the HTML interface that was previously embedded in the Python backend. It provides:
-
-- **Sidebar with notebook management**
-- **Document upload and management**
-- **Real-time chat interface for debates**
-- **Loading states and error handling**
-- **Responsive design**
-
-### DebateInterface (Alternative)
-
-A Material-UI based interface with:
-- **Modern Material-UI components**
-- **Enhanced user experience**
-- **Professional design**
-- **Better accessibility**
-
-## 📊 Usage Examples
-
-### Web Interface
-
-1. **Upload Documents**: Drag and drop PDF files
-2. **Create Database**: Automatically processes uploaded files
-3. **Generate Debates**: Enter topics and get structured debates
-4. **Export Results**: Download debate transcripts
-
-### Command Line
-
-```bash
-# Generate a debate
-python query_debate.py "Should AI replace human teachers?"
-
-# Generate with custom parameters
-python query_debate.py "Renewable energy vs fossil fuels" --model mistral --temperature 0.7
 ```
-
-### API Usage
-
-```bash
-# Get document list
-curl http://localhost:5000/api/documents
-
-# Generate debate
-curl -X POST http://localhost:5000/api/generate \
-  -H "Content-Type: application/json" \
-  -d '{"topic": "Should AI replace human teachers?"}'
-
-# Upload documents
-curl -X POST http://localhost:5000/api/upload \
-  -F "files=@document1.pdf" \
-  -F "files=@document2.pdf"
+PDF Upload
+   ↓
+Text Extraction (PyPDF)
+   ↓
+Chunking (600 chars, 80 overlap)
+   ↓
+Embedding (Gemini embeddings)
+   ↓
+ChromaDB (persistent storage)
+   ↓
+Retriever (Top-K=4)
+   ↓
+Gemini Flash (generation)
+   ↓
+Final Answer (concise + sources)
 ```
 
 ## 🔧 Configuration
 
-### Backend Configuration
+### Performance Optimizations
 
-Edit `app.py` to configure:
-- **Port**: Change the server port
-- **Model**: Specify different Ollama models
-- **Timeout**: Adjust generation timeouts
-- **Database**: Configure vector database settings
+- **Chunk Size**: 600 characters
+- **Overlap**: 80 characters
+- **Top-K**: 4 similar chunks
+- **Temperature**: 0.1 (for concise answers)
+- **Max Tokens**: 500 (response limit)
 
-### Frontend Configuration
+### Caching
 
-Edit `vite.config.ts` to configure:
-- **Proxy**: Backend server address
-- **Build settings**: Production optimizations
-- **Environment variables**: API endpoints
+- Embeddings are cached automatically
+- Vector database persists between sessions
+- No re-embedding of existing PDFs
 
-## 🛠️ Development
+## 📊 API Endpoints
 
-### Backend Development
-
+### POST /upload
+Upload PDF files for indexing
 ```bash
-# Start backend with auto-reload
-python app.py
-
-# Debug mode
-export FLASK_ENV=development
-python app.py
+curl -X POST "http://localhost:8000/upload" \
+  -F "files=@document1.pdf" \
+  -F "files=@document2.pdf"
 ```
 
-### Frontend Development
-
+### POST /query
+Query the RAG system
 ```bash
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+curl -X POST "http://localhost:8000/query" \
+  -F "question=What is the main topic of these documents?"
 ```
 
-### Adding New Features
-
-1. **Backend**: Add new endpoints in `app.py`
-2. **Frontend**: Create new components in `src/components/`
-3. **Database**: Modify `create_database.py` for new document types
-4. **API**: Update `query_debate.py` for new generation features
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **Ollama not found**
-   - Ensure Ollama is installed and running
-   - Check if the model is downloaded: `ollama list`
-
-2. **Port already in use**
-   - Change the port in `app.py` or `vite.config.ts`
-   - Kill existing processes using the port
-
-3. **PDF processing errors**
-   - Check PDF file integrity
-   - Ensure PDFs are not password protected
-   - Verify file permissions
-
-4. **Frontend-backend communication**
-   - Check if backend is running on port 5000
-   - Verify proxy configuration in `vite.config.ts`
-   - Check CORS settings in backend
-
-### Performance Optimization
-
-1. **Large PDFs**: Split large documents into smaller chunks
-2. **Multiple models**: Use different models for different tasks
-3. **Caching**: Implement result caching for frequently asked topics
-4. **Database**: Optimize vector database settings for your use case
-
-## 📚 API Reference
-
-### GET /api/documents
-
-Get list of uploaded documents.
-
-**Response:**
-```json
-{
-  "success": true,
-  "documents": [
-    {
-      "name": "document.pdf",
-      "size": 1024000,
-      "uploaded_at": "2023-12-23T10:00:00Z"
-    }
-  ]
-}
+### GET /documents
+List all indexed documents
+```bash
+curl "http://localhost:8000/documents"
 ```
 
-### POST /api/upload
-
-Upload PDF files.
-
-**Request:**
-- Form data with `files` field containing PDF files
-
-**Response:**
-```json
-{
-  "success": true,
-  "message": "Files uploaded successfully"
-}
+### DELETE /clear
+Clear the vector database
+```bash
+curl -X DELETE "http://localhost:8000/clear"
 ```
 
-### POST /api/generate
+## 🎯 Usage Examples
 
-Generate a debate on a topic.
+### Streamlit UI
+1. Open http://localhost:8501 in your browser
+2. Upload PDF files in the sidebar
+3. Ask questions in the chat interface
+4. View answers with source citations
 
-**Request:**
-```json
-{
-  "topic": "Should AI replace human teachers?"
-}
+### API Integration
+```python
+import requests
+
+# Upload documents
+files = [('files', open('doc1.pdf', 'rb')), ('files', open('doc2.pdf', 'rb'))]
+response = requests.post('http://localhost:8000/upload', files=files)
+
+# Query
+response = requests.post('http://localhost:8000/query', data={'question': 'What is this about?'})
+print(response.json())
 ```
 
-**Response:**
-```json
-{
-  "success": true,
-  "result": "Generated debate content..."
-}
-```
+## ⚙️ Environment Variables
 
-### POST /api/create_database
+- `GOOGLE_API_KEY`: Required for Gemini Flash access
 
-Create or update the vector database.
 
-**Response:**
-```json
-{
-  "success": true,
-  "message": "Database created successfully"
-}
-```
+## 🧪 Testing
+
+The application is designed to be minimal and functional:
+
+1. **Functional Testing**: Upload PDFs and verify answers
+2. **Performance Testing**: Measure response times (< 2 seconds target)
+3. **Integration Testing**: Test API endpoints
+
+## 📈 Performance
+
+- **Response Time**: < 2 seconds (target)
+- **Memory Usage**: Minimal (no unnecessary caching)
+- **Startup Time**: Fast (minimal dependencies)
+- **Scalability**: Single-user focused
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
+This is a minimal implementation. For contributions:
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- **LangChain** - For RAG framework
-- **ChromaDB** - For vector database
-- **Ollama** - For local LLM integration
-- **React** - For frontend framework
-- **Material-UI** - For UI components
-
-## 📞 Support
-
-For support and questions:
-- Create an issue on GitHub
-- Check the troubleshooting section
-- Review the API documentation
+1. Keep dependencies minimal
+2. Maintain performance focus
+3. Preserve simplicity
+4. No unnecessary abstraction
 
 ---
 
-**Note**: This application requires significant computational resources for optimal performance. Ensure your system meets the requirements for running local LLMs.
+**Built with ❤️ for fast, accurate, and minimal RAG applications.**

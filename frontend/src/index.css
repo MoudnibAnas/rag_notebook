@@ -1,11 +1,12 @@
-/* Import the Sidebar styles in the main App */
-@import './components/Sidebar.css';
-@import './components/DebateInterface.css';
-@import './components/DocumentsPanel.css';
+/* Import the NotebookLM styles */
+@import './components/NotebookLM.css';
+@import './components/NotebookList.css';
+@import './components/NotebookEditor.css';
+@import './components/DocumentManager.css';
 @import './components/ChatInterface.css';
 
 /* Material Icons */
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 /* Inter Font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
