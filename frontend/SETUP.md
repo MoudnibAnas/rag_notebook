@@ -39,8 +39,7 @@ The frontend will start on `http://localhost:3000`.
 In a separate terminal, navigate to the project root and start the Flask backend:
 
 ```bash
-cd local_rag_debate
-python app.py
+python backend_server.py
 ```
 
 The backend will start on `http://localhost:5000`.

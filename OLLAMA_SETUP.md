@@ -44,7 +44,7 @@ If you get "Error connecting to Ollama", ensure:
 3. You have internet access for the initial download
 
 ### Slow Response
-Debate generation may take 1-2 minutes with local LLMs. This is normal for complex document analysis.
+Debate generation typically takes 15-30 seconds with optimized local LLMs. Response time depends on document complexity and system resources.
 
 ### Memory Issues
 If you get memory errors, try:
