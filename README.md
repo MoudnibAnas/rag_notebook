@@ -2,7 +2,7 @@
 
 
 
-A minimal, high-performance RAG application similar to NotebookLM, built with Python, Google Gemini Flash, and ChromaDB.
+A minimal, high-performance RAG application similar to NotebookLM, built with Python, Ollama - For local LLM integration, and ChromaDB.
 
 ## 🎥 Video Demo
 [**Watch My Loom video demo here**](#) 
@@ -23,7 +23,7 @@ A minimal, high-performance RAG application similar to NotebookLM, built with Py
 - **FastAPI** - Backend API
 - **Streamlit** - Frontend UI
 - **LangChain** - RAG orchestration
-- **Ollama or Google Gemini Flash** - LLM (model: gemini-2.0-flash)
+- **Ollama - For local LLM  or Google Gemini Flash** - LLM (model: gemini-2.0-flash)
 - **ChromaDB** - Vector database
 - **PyPDF** - PDF processing
 
