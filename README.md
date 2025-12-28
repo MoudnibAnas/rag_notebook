@@ -8,7 +8,7 @@ A minimal, high-performance RAG application similar to NotebookLM, built with Py
 [**View the image here**](https://ibb.co/zWmqC9Q5)
 
 ## 🎥 Video Demo
-[**Watch My Loom video demo here**](#) 
+[**Watch My Loom video demo here**](#https://www.loom.com/share/718a240e6707401181daffcf4df5dcba) 
 
 ## ⚡ Features
 
